@@ -5,6 +5,9 @@
     header('Location: login.php');
   }
 ?>
+<?php
+  include 'lib/secure.php';
+?>
 <!doctype html>
 <html lang="ja">
   <head>
