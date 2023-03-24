@@ -58,6 +58,7 @@
   </div>
 </nav>
 
+<?php include('lib/nav.php'); ?>
 <main class="container">
   <div class="row">
     <div class="col-md-12">

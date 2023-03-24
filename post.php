@@ -57,6 +57,7 @@
       </div>
   </div>
 </nav>
+<?php include('lib/nav.php'); ?>
 
 <main class="container">
   <div class="row">
