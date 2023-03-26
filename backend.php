@@ -1,10 +1,5 @@
 <!-- ここから追加する -->
-<?php
-  session_start();
-  if (!isset($_SESSION['id'])){
-    header('Location: login.php');
-  }
-?>
+
 <?php
   include 'lib/secure.php';
 ?>
