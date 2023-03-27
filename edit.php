@@ -17,6 +17,7 @@
     $article = $queryArticle->find($_GET['id']);
 
     if ($article){
+      var_dump("pass");
       // 編集する記事データが存在したとき、フォームに埋め込む
       $id = $article->getId();
       $title = $article->getTitle();
@@ -64,7 +65,7 @@
       $body_alert = "本文を入力してください。";
     }
   }
-
+ ?>
 <!doctype html>
 <html lang="ja">
   <head>
@@ -120,24 +121,24 @@
   <div class="row">
     <div class="col-md-12">
 
-  <h1>記事の投稿</h1>
+    <h1>記事の編集</h1>
 
- <form action="post.php" method="post">
+<form action="edit.php" method="post">
+  <input type="hidden" name="id" value="<?php echo $id ?>">
   <div class="mb-3">
-     <label class="form-label">タイトル</label>
-     <?php echo !empty($title_alert)? '<div class="alert alert-danger">'.$title_alert.'</div>': '' ?>
-     <input type="text" name="title" value="<?php echo $title; ?>" class="form-control">
+    <label class="form-label">タイトル</label>
+    <?php echo !empty($title_alert)? '<div class="alert alert-danger">'.$title_alert.'</div>': '' ?>
+    <input type="text" name="title" value="<?php echo $title; ?>" class="form-control">
   </div>
   <div class="mb-3">
-     <label class="form-label">本文</label>
-     <?php echo !empty($body_alert)? '<div class="alert alert-danger">'.$body_alert.'</div>': '' ?>
-     <textarea name="body" class="form-control" rows="10"><?php echo $body; ?></textarea>
+    <label class="form-label">本文</label>
+    <?php echo !empty($body_alert)? '<div class="alert alert-danger">'.$body_alert.'</div>': '' ?>
+    <textarea name="body" class="form-control" rows="10"><?php echo $body; ?></textarea>
   </div>
   <div class="mb-3">
-     <button type="submit" class="btn btn-primary">投稿する</button>
+    <button type="submit" class="btn btn-primary">投稿する</button>
   </div>
- </form>
-
+</form>
     </div>
 
   </div><!-- /.row -->
