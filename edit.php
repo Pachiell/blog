@@ -17,7 +17,6 @@
     $article = $queryArticle->find($_GET['id']);
 
     if ($article){
-      var_dump("pass");
       // 編集する記事データが存在したとき、フォームに埋め込む
       $id = $article->getId();
       $title = $article->getTitle();
