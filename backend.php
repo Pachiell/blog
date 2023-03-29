@@ -72,6 +72,7 @@
             <th>ID</th>
             <th>タイトル</th>
             <th>本文</th>
+            <th>画像</th>
             <th>作成日</th>
             <th>更新日</th>
             <th>編集</th>
