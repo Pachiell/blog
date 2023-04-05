@@ -77,7 +77,8 @@ class QueryArticle extends connect{
   public function save(){
     $title = $this->article->getTitle();
     $body = $this->article->getBody();
-    $filename = $this->article->getFilename();
+    $filename = null;
+   // $filename = $this->article->getFilename();
     if ($this->article->getId()){
       // IDがあるときは上書き
       $id = $this->article->getId();
@@ -96,9 +97,10 @@ class QueryArticle extends connect{
       $stmt->bindParam(':id', $id, PDO::PARAM_INT);
       $stmt->execute();
     } else {
+      // IDがなければ新規作成
       if ($file = $this->article->getFile()){
-        $old_name = $file['tmp_name'];
         $new_name = date('YmdHis').mt_rand();
+        $old_name = $file['tmp_name'];
 
         // アップロード可否を決める変数。デフォルトはアップロード不可
         $is_upload = false;
@@ -121,16 +123,16 @@ class QueryArticle extends connect{
             break;
         }   
 
+        if ($file = $this->article->getFile()){
+          $this->article->setFilename($this->saveFile($file['tmp_name']));
+          $filename = $this->article->getFilename();
+        }
         if ($is_upload && move_uploaded_file($old_name, __DIR__.'/../album/'.$new_name)){
           $this->article->setFilename($new_name);
           $filename = $this->article->getFilename();
         }   
-      }
-        if ($file = $this->article->getFile()){
-            $this->article->setFilename($this->saveFile($file['tmp_name']));
-            $filename = $this->article->getFilename();
-          }
-        
+
+        }
 
       $stmt = $this->dbh->prepare("INSERT INTO articles (title, body, filename, created_at, updated_at)
              VALUES (:title, :body, :filename, NOW(), NOW())");
