@@ -20,13 +20,13 @@ if (!empty($_POST['action']) && $_POST['action'] == 'add' && !empty($_POST['name
         $category->setName($_POST['name']);
         $category->save();
     }
-    }else if(!empty($_GET['action']) && $_GET['action'] == 'delete' && !empty($_GET['id'])){
-        // 削除モードのとき
-        $category = $queryCategory->find($_GET['id']);
-        if ($category){
-          $category->delete();
-        }
+} else if (!empty($_GET['action']) && $_GET['action'] == 'delete' && !empty($_GET['id'])) {
+    // 削除モードのとき
+    $category = $queryCategory->find($_GET['id']);
+    if ($category) {
+        $category->delete();
     }
+}
 
 
 // 登録されているカテゴリーをすべて取得
