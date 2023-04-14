@@ -1,26 +1,3 @@
-<!-- ここから追加する -->
-
-<?php
-include 'lib/secure.php';
-include 'lib/connect.php';
-include 'lib/queryArticle.php';
-include 'lib/article.php';
-include 'lib/queryCategory.php';
-
-$limit = 10;
-$page = 1;
-
-// ページ数の決定
-if (!empty($_GET['page']) && intval($_GET['page']) > 0) {
-  $page = intval($_GET['page']);
-}
-
-$queryArticle = new QueryArticle();
-$pager = $queryArticle->getPager($page, $limit);
-
-$queryCategory = new QueryCategory();
-$categories = $queryCategory->findAll();
-?>
 
 <!doctype html>
 <html lang="ja">
@@ -31,7 +8,7 @@ $categories = $queryCategory->findAll();
   <title>Blog Backend</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="./css/bootstrap.min.css" rel="stylesheet">
+  <link href="../html/asets/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
     body {
@@ -58,7 +35,7 @@ $categories = $queryCategory->findAll();
   </style>
 
   <!-- Custom styles for this template -->
-  <link href="./css/blog.css" rel="stylesheet">
+  <link href="../html/asets/css/blog.css" rel="stylesheet">
 </head>
 
 <body>
@@ -75,7 +52,7 @@ $categories = $queryCategory->findAll();
     </div>
   </nav>
 
-  <?php include('lib/nav.php'); ?>
+  <?php include('../view/templates/nav.php'); ?>
   <main class="container">
     <div class="row">
       <div class="col-md-12">
@@ -102,7 +79,7 @@ $categories = $queryCategory->findAll();
                   <td><?php echo $article->getId() ?></td>
                   <td><?php echo $article->getTitle() ?></td>
                   <td><?php echo $article->getBody() ?></td>
-                  <td><?php echo $article->getFilename() ? '<img src="./album/thumbs-' . $article->getFilename() . '">' : 'なし' ?></td>
+                  <td><?php echo $article->getFilename() ? '<img src="../html/asets/images/album/thumbs-' . $article->getFilename() . '">' : 'なし' ?></td>
                   <td><?php echo isset($categories[$article->getCategoryId()]) ? $categories[$article->getCategoryId()]->getName() : 'なし' ?></td>
                   <td><?php echo $article->getCreatedAt() ?></td>
                   <td><?php echo $article->getUpdatedAt() ?></td>
