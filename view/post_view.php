@@ -1,62 +1,3 @@
-<!-- ここから追加する -->
-
-<?php
-include 'lib/secure.php';
-include 'lib/connect.php';
-include 'lib/queryArticle.php';
-include 'lib/article.php';
-include 'lib/queryCategory.php';
-
-$title = "";        // タイトル
-$body = "";         // 本文
-$title_alert = "";  // タイトルのエラー文言
-$body_alert = "";   // 本文のエラー文言
-
-// カテゴリーの準備
-$queryCategory = new QueryCategory();
-$categories = $queryCategory->findAll();
-
-if (!empty($_POST['title']) && !empty($_POST['body'])) {
-  // titleとbodyがPOSTメソッドで送信されたとき
-  $title = $_POST['title'];
-  $body = $_POST['body'];
-  $article = new Article();
-  $article->setTitle($title);
-  $article->setBody($body);
-  // 省略
-  $article->setTitle($title);
-  $article->setBody($body);
-
-  if (isset($_FILES['image']) && is_uploaded_file($_FILES['image']['tmp_name'])) {
-    $article->setFile($_FILES['image']);
-  }
-
-  if (!empty($_POST['category'])) {
-    $category = $queryCategory->find($_POST['category']);
-    if ($category) {
-      $article->setCategoryId($category->getId());
-    }
-  }
-
-  $article->save();
-  header('Location: backend.php');
-} else if (!empty($_POST)) {
-  // POSTメソッドで送信されたが、titleかbodyが足りないとき
-  // 存在するほうは変数へ、ない場合空文字にしてフォームのvalueに設定する
-  if (!empty($_POST['title'])) {
-    $title = $_POST['title'];
-  } else {
-    $title_alert = "タイトルを入力してください。";
-  }
-
-  if (!empty($_POST['body'])) {
-    $body = $_POST['body'];
-  } else {
-    $body_alert = "本文を入力してください。";
-  }
-}
-?>
-
 <!doctype html>
 <html lang="ja">
 
@@ -66,7 +7,7 @@ if (!empty($_POST['title']) && !empty($_POST['body'])) {
   <title>Blog Backend</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="./css/bootstrap.min.css" rel="stylesheet">
+  <link href="../html/asets/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
     body {
@@ -93,7 +34,7 @@ if (!empty($_POST['title']) && !empty($_POST['body'])) {
   </style>
 
   <!-- Custom styles for this template -->
-  <link href="./css/blog.css" rel="stylesheet">
+  <link href="../html/asets/css/blog.css" rel="stylesheet">
 </head>
 
 <body>
@@ -109,7 +50,7 @@ if (!empty($_POST['title']) && !empty($_POST['body'])) {
       </div>
     </div>
   </nav>
-  <?php include('lib/nav.php'); ?>
+  <?php include('../view/templates/nav.php'); ?>
 
   <main class="container">
     <div class="row">

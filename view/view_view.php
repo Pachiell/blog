@@ -1,21 +1,4 @@
-<?php
-include 'lib/connect.php';
-include 'lib/queryArticle.php';
-include 'lib/article.php';
-include 'lib/queryCategory.php';
 
-$queryArticle = new QueryArticle();
-$queryCategory = new QueryCategory();
-
-if (!empty($_GET['id'])) {
-  $id = intval($_GET['id']);
-  $article = $queryArticle->find($id);
-} else {
-  $article = null;
-}
-$monthly = $queryArticle->getMonthlyArchiveMenu();
-$category = $queryCategory->getCategoryMenu();
-?>
 <!doctype html>
 <html lang="ja">
 
@@ -25,7 +8,7 @@ $category = $queryCategory->getCategoryMenu();
   <title>Blog</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="./css/bootstrap.min.css" rel="stylesheet">
+  <link href="../html/asets/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
     body {
@@ -48,7 +31,7 @@ $category = $queryCategory->getCategoryMenu();
   </style>
 
   <!-- Custom styles for this template -->
-  <link href="./css/blog.css" rel="stylesheet">
+  <link href="../html/asets/css/blog.css" rel="stylesheet">
 </head>
 
 <body>
