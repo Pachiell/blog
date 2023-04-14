@@ -1,8 +1,8 @@
 <?php
-  include 'lib/secure.php';
-  include 'lib/connect.php';
-  include 'lib/queryArticle.php';
-  include 'lib/article.php';
+  include '../model/classes/secure.php';
+  include '../model/classes/connect.php';
+  include '../model/classes/queryArticle.php';
+  include '../model/classes/article.php';
 
   if (!empty($_GET['id'])){
     $queryArticle = new QueryArticle();

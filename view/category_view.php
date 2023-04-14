@@ -1,39 +1,3 @@
-<?php
-include('lib/secure.php');
-include('lib/connect.php');
-include('lib/queryCategory.php');
-
-$queryCategory = new QueryCategory();
-$formCategory = null; // 編集するカテゴリ情報
-
-if (!empty($_POST['action']) && $_POST['action'] == 'add' && !empty($_POST['name'])) {
-    $category = new Category();
-    $category->setName($_POST['name']);
-    $category->save();
-} else if (!empty($_GET['action']) && $_GET['action'] == 'edit' && !empty($_GET['id'])) {
-    // 編集モードのとき
-    $formCategory = $queryCategory->find($_GET['id']);
-} else if (!empty($_POST['action']) && $_POST['action'] == 'edit' && !empty($_POST['id']) && !empty($_POST['name'])) {
-    // 編集
-    $category = $queryCategory->find($_POST['id']);
-    if ($category) {
-        $category->setName($_POST['name']);
-        $category->save();
-    }
-} else if (!empty($_GET['action']) && $_GET['action'] == 'delete' && !empty($_GET['id'])) {
-    // 削除モードのとき
-    $category = $queryCategory->find($_GET['id']);
-    if ($category) {
-        $category->delete();
-    }
-}
-
-
-// 登録されているカテゴリーをすべて取得
-$categories = $queryCategory->findAll();
-
-?>
-
 <!doctype html>
 <html lang="ja">
 
@@ -43,7 +7,7 @@ $categories = $queryCategory->findAll();
     <title>Blog Backend</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="../html/asets/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         body {
@@ -70,12 +34,12 @@ $categories = $queryCategory->findAll();
     </style>
 
     <!-- Custom styles for this template -->
-    <link href="./css/blog.css" rel="stylesheet">
+    <link href="../html/asets/css/blog.css" rel="stylesheet">
 </head>
 
 <body>
 
-    <?php include('lib/nav.php'); ?>
+    <?php include('../view/templates/nav.php'); ?>
 
     <main class="container">
         <div class="row">
